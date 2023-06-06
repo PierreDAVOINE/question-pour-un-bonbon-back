@@ -1,0 +1,27 @@
+{
+  "name": "question-pour-un-bonbon-back",
+  "version": "0.0.1",
+  "description": "Question pour un bonbon back est l'API d'un jeu de quiz.",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "dev": "concurrently -k -n \"Typescript,Node\" -p \"[{name}]\" -c \"blue,green\" \"tsc --watch\" \"nodemon dist/index.js\""
+  },
+  "author": "Pierre Davoine",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.1.4",
+    "email-validator": "^2.0.4",
+    "express": "^4.18.2",
+    "joi": "^17.9.2",
+    "jsonwebtoken": "^9.0.0",
+    "pg": "^8.11.0",
+    "sequelize": "^6.32.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.42.0"
+  }
+}
