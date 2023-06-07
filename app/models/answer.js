@@ -1,17 +1,16 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('./pg.client');
 
-class Quiz extends Model {}
+class Answer extends Model {}
 
-Quiz.init(
+Answer.init(
   {
-    title: { type: DataTypes.STRING, allowNull: false },
     description: { type: DataTypes.STRING, allowNull: false },
   },
   {
     sequelize,
-    tableName: 'quiz',
+    tableName: 'answer',
   }
 );
 
-module.exports = Quiz;
+module.exports = Answer;

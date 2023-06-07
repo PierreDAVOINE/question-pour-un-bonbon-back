@@ -3,7 +3,6 @@ const { Quiz } = require('../models');
 const controller = {
   //* Récupérer la liste des quiz
   getAllQuiz: async (req, res) => {
-    console.log('getAllQuiz');
     try {
       // On va chercher la liste des quiz en BDD
       const quiz = await Quiz.findAll();
@@ -26,7 +25,7 @@ const controller = {
   getOneQuiz: async (req, res) => {
     const { quizId } = req.params;
     try {
-      // On va chercher le quizz en BDD
+      // On va chercher le quizz en BDD avec les questions et les réponses
       const quiz = await Quiz.findByPk(quizId);
       // Si le quizz n'existe pas, on renvoie une erreur
       if (!quiz) {
