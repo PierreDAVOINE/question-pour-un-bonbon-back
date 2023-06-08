@@ -10,8 +10,8 @@ visiteur| pouvoir visualiser la difficulté de chaque question |  | - | 1 |
 visiteur| visualiser les sujets de chaque quiz sur la page du quiz |  | - | 1 |
 visiteur| pouvoir visualiser tous les sujets | afin de pouvoir accéder aux quiz d’un sujet | - | 1 |
 visiteur| pouvoir visualiser tous les quiz pour un sujet donné |  | - | 1 |
-visiteur| accéder à un formulaire d’inscription | pouvoir m’inscrire | - | 1 |
-visiteur| accéder à un formulaire de connexion | pouvoir me connecter | - | 1 |
+visiteur| accéder à un formulaire d’inscription | pouvoir m’inscrire | - | 2 |
+visiteur| accéder à un formulaire de connexion | pouvoir me connecter | - | 2 |
 visiteur| pouvoir m’inscrire | avoir un compte et répondre aux quiz | - | 2 |
 visiteur| pouvoir me connecter à mon compte | pouvoir répondre aux quiz | - | 2 |
 membre| pouvoir accéder à ma page profil | visualiser les données de mon compte | - | 2 |

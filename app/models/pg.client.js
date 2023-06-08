@@ -5,13 +5,14 @@ const { Sequelize } = require('sequelize');
 require('dotenv').config();
 
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
-  // si on voulait faire un conversion de camelCase à snake_case
+  // Conversion de camelCase à snake_case
   define: {
     underscored: true,
   },
   dialect: 'postgres',
 });
 
+// Test de connexion à la BDD
 sequelize
   .authenticate()
   .then(function () {
