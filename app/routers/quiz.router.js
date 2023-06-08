@@ -9,7 +9,10 @@ const router = express.Router();
  * Définitions des routes quiz
  *============================== */
 
-//Récupérer de toutes les tâches
+// Récupérer la liste des quiz
+router.get('/', controller.quiz.getAllQuiz);
+
+// Récupérer un quiz dans son intégralité
 router.get('/:quizId', controller.quiz.getOneQuiz);
 
 module.exports = router;
