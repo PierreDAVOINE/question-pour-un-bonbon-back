@@ -3,7 +3,9 @@ const User = require('./user');
 const Question = require('./question');
 const Answer = require('./answer');
 const Tag = require('./tag');
+const Level = require('./level');
 
+//* QUIZ / USER
 // User : "un Quiz appartient à un User"
 Quiz.belongsTo(User, {
   foreignKey: 'user_id',
@@ -16,6 +18,7 @@ User.hasMany(Quiz, {
   as: 'quizList',
 });
 
+//* QUESTION / QUIZ
 // Question : "une question apapartient à un Quiz"
 Question.belongsTo(Quiz, {
   foreignKey: 'quiz_id',
@@ -27,6 +30,50 @@ Quiz.hasMany(Question, {
   as: 'questionList',
 });
 
-// TODO: Continuer les liaisons entre les modèles
+//* ANSWER / QUESTION
+// Answer : "une réponse appartient à une Question"
+Answer.belongsTo(Question, {
+  foreignKey: 'question_id',
+});
 
-module.exports = { Quiz, User };
+// ...et la réciproque : "une Question possède plusieurs réponses"
+Question.hasMany(Answer, {
+  foreignKey: 'question_id',
+  as: 'answerList',
+});
+
+// Question : "une question possède une réponse correcte"
+Question.belongsTo(Answer, {
+  foreignKey: 'answer_id',
+  as: 'correctAnswer',
+});
+
+//* TAG / QUIZ
+// Tag : "un Tag possède plusieurs Quiz"
+Tag.belongsToMany(Quiz, {
+  foreignKey: 'tag_id',
+  as: 'quizList',
+  through: 'quiz_tag',
+});
+
+// "un Quiz possède plusieurs Tags"
+Quiz.belongsToMany(Tag, {
+  foreignKey: 'quiz_id',
+  as: 'tagList',
+  through: 'quiz_tag',
+});
+// ! =================
+
+//* QUESTION / LEVEL
+// Question : "une Question appartient à un Level"
+Question.belongsTo(Level, {
+  foreignKey: 'level_id',
+});
+
+// ...et la réciproque : "un Level possède plusieurs Questions"
+Level.hasMany(Question, {
+  foreignKey: 'level_id',
+  as: 'questionList',
+});
+
+module.exports = { Quiz, User, Question, Answer, Tag, Level };
