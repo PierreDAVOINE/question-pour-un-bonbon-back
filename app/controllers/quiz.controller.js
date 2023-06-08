@@ -5,7 +5,13 @@ const controller = {
   getAllQuiz: async (req, res) => {
     try {
       // On va chercher la liste des quiz en BDD
-      const quiz = await Quiz.findAll();
+      const quiz = await Quiz.findAll({
+        include: [
+          {
+            association: 'tagList',
+          },
+        ],
+      });
       // Si il n'y a pas de quiz, on renvoie une erreur
       if (!quiz) {
         console.log('Aucun résultat trouvé.');
@@ -26,7 +32,16 @@ const controller = {
     const { quizId } = req.params;
     try {
       // On va chercher le quizz en BDD avec les questions et les réponses
-      const quiz = await Quiz.findByPk(quizId);
+      const quiz = await Quiz.findByPk(quizId, {
+        include: [
+          { association: 'tagList' },
+          { association: 'author' },
+          {
+            association: 'questionList',
+            include: [{ association: 'level' }, { association: 'answerList' }],
+          },
+        ],
+      });
       // Si le quizz n'existe pas, on renvoie une erreur
       if (!quiz) {
         console.log('Aucun résultat trouvé.');

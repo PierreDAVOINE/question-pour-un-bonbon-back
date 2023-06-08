@@ -53,14 +53,16 @@ Question.belongsTo(Answer, {
 Tag.belongsToMany(Quiz, {
   foreignKey: 'tag_id',
   as: 'quizList',
-  through: 'quiz_tag',
+  through: 'quiz_has_tag',
+  otherKey: 'quiz_id',
 });
 
 // "un Quiz possède plusieurs Tags"
 Quiz.belongsToMany(Tag, {
   foreignKey: 'quiz_id',
   as: 'tagList',
-  through: 'quiz_tag',
+  through: 'quiz_has_tag',
+  otherKey: 'tag_id',
 });
 // ! =================
 
@@ -68,6 +70,7 @@ Quiz.belongsToMany(Tag, {
 // Question : "une Question appartient à un Level"
 Question.belongsTo(Level, {
   foreignKey: 'level_id',
+  as: 'level',
 });
 
 // ...et la réciproque : "un Level possède plusieurs Questions"
