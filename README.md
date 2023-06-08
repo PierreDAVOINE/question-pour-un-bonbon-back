@@ -27,4 +27,4 @@ node index
 
 ## Routes
 
-Actuellement le projet comporte les routes "users", "plants", "todo" et "garden".
+Actuellement le projet comporte les routes "quiz" et "user".
