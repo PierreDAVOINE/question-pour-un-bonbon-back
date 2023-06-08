@@ -17,6 +17,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Utilisation des routers
+app.use('/user', router.user);
 app.use('/quiz', router.quiz);
 
 app.listen(port, () => {

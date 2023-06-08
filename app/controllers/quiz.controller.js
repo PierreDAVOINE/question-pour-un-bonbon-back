@@ -31,7 +31,7 @@ const controller = {
   getOneQuiz: async (req, res) => {
     const { quizId } = req.params;
     try {
-      // On va chercher le quizz en BDD avec les questions et les réponses
+      // On va chercher le quizz en BDD avec les quiz, tags, autheurs, questions et réponses
       const quiz = await Quiz.findByPk(quizId, {
         include: [
           { association: 'tagList' },
