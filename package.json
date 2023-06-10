@@ -19,7 +19,8 @@
     "joi": "^17.9.2",
     "jsonwebtoken": "^9.0.0",
     "pg": "^8.11.0",
-    "sequelize": "^6.32.0"
+    "sequelize": "^6.32.0",
+    "swagger-ui-express": "^4.6.3"
   },
   "devDependencies": {
     "eslint": "^8.42.0"

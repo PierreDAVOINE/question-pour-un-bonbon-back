@@ -11,7 +11,7 @@ const controller = {
       // Si l'email est déjà utilisé on prévient le client
       if (emailAlreadyUse) {
         console.log('Email déjà utilisé.');
-        res.json({
+        res.status(401).json({
           message: 'Un compte éxiste déjà avec cette adresse email.',
         });
       }
@@ -51,7 +51,7 @@ const controller = {
       // Si l'utilisateur n'existe pas, on prévient le client
       if (!user) {
         console.log('Utilisateur non trouvé.');
-        return res.status(404).json({ message: 'Utilisateur non trouvé.' });
+        return res.status(404).json({ message: 'Identifiants incorrect.' });
       }
       // On compare le mot de passe envoyé par le client avec celui en BDD
       const isMatch = await bcrypt.compare(password, user.password);

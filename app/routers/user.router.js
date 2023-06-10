@@ -10,10 +10,10 @@ const router = express.Router();
  *============================== */
 
 // Connexion d'un utilisateur
-router.get('/', controller.user.login);
+router.post('/login', controller.user.login);
 
 // Création d'un compte utilisateur
-router.post('/', controller.user.signup);
+router.post('/signup', controller.user.signup);
 
 // Mise à jour d'un utilisateur
 router.patch('/:userId', controller.user.updateUser);
