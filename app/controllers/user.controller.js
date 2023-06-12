@@ -11,7 +11,7 @@ const controller = {
       // Si l'email est déjà utilisé on prévient le client
       if (emailAlreadyUse) {
         console.log('Email déjà utilisé.');
-        res.status(401).json({
+        return res.status(401).json({
           message: 'Un compte éxiste déjà avec cette adresse email.',
         });
       }
@@ -25,9 +25,11 @@ const controller = {
         email,
         password: hashedPassword,
       });
-      // Si l'utilisateur a été créee, on le renvoie
+      // Si l'utilisateur a été créee, on préviens le client
       if (user) {
-        return res.status(201).json(user);
+        return res
+          .status(201)
+          .json({ message: "L'utilisateur a bien été créé." });
       } else {
         // Sinon on lève une erreur
         throw new Error();

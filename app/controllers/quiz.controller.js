@@ -9,6 +9,11 @@ const controller = {
         include: [
           {
             association: 'tagList',
+            // On séléctione que le nom et l'id du tag
+            attributes: ['id', 'name'],
+            through: {
+              attributes: [],
+            },
           },
         ],
       });
@@ -34,11 +39,30 @@ const controller = {
       // On va chercher le quizz en BDD avec les quiz, tags, autheurs, questions et réponses
       const quiz = await Quiz.findByPk(quizId, {
         include: [
-          { association: 'tagList' },
-          { association: 'author' },
+          {
+            association: 'tagList',
+            attributes: ['id', 'name'],
+            through: {
+              attributes: [],
+            },
+          },
+          {
+            association: 'author',
+            attributes: {
+              exclude: ['email', 'password', 'createdAt', 'updatedAt'],
+            },
+          },
           {
             association: 'questionList',
-            include: [{ association: 'level' }, { association: 'answerList' }],
+            include: [
+              {
+                association: 'level',
+                attributes: {
+                  exclude: ['createdAt', 'updatedAt'],
+                },
+              },
+              { association: 'answerList' },
+            ],
           },
         ],
       });

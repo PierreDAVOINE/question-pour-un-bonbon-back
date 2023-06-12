@@ -27,4 +27,6 @@ node index
 
 ## Routes
 
-Actuellement le projet comporte les routes "quiz" et "user".
+La doc swagger des routes est disponible à l'addresse : `http://localhost:3000/api-docs`
+
+Actuellement le projet comporte uniquement les routes "quiz" et "user".

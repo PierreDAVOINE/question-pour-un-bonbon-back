@@ -22,6 +22,22 @@
                     }
                 }
             },
+            "user": {
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "firstname": {
+                        "type": "string"
+                    },
+                    "lastname": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    }
+                }
+            },
             "userRegister": {
                 "properties": {
                     "firstname": {
@@ -47,6 +63,161 @@
                         "type": "string"
                     }
                 }
+            },
+            "quizList": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "type": "string"
+                    },
+                    "user_id": {
+                        "type": "string"
+                    },
+                    "tagList": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "number"
+                                },
+                                "name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "oneQuiz": {
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "type": "string"
+                    },
+                    "user_id": {
+                        "type": "number"
+                    },
+                    "tagList": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "number"
+                                },
+                                "name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "author": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "number"
+                            },
+                            "firstname": {
+                                "type": "string"
+                            },
+                            "lastname": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "questionList": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "number"
+                                },
+                                "question": {
+                                    "type": "string"
+                                },
+                                "anecdote": {
+                                    "type": "string"
+                                },
+                                "wiki": {
+                                    "type": "string"
+                                },
+                                "createdAt": {
+                                    "type": "number"
+                                },
+                                "updatedAt": {
+                                    "type": "number"
+                                },
+                                "quiz_id": {
+                                    "type": "number"
+                                },
+                                "answer_id": {
+                                    "type": "number"
+                                },
+                                "level_id": {
+                                    "type": "number"
+                                },
+                                "level": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "number"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "answerList": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "number"
+                                            },
+                                            "description": {
+                                                "type": "string"
+                                            },
+                                            "createdAt": {
+                                                "type": "string"
+                                            },
+                                            "updatedAt": {
+                                                "type": "string"
+                                            },
+                                            "question_id": {
+                                                "type": "number"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     },
@@ -56,6 +227,7 @@
                 "tags": [
                     "User"
                 ],
+                "summary": "Allow user to get login.",
                 "description": "Allow user to get login.",
                 "requestBody": {
                     "description": "User's login",
@@ -70,16 +242,56 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "User is logged in."
+                        "description": "User is logged in.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/user"
+                                }
+                            }
+                        }
                     },
                     "401": {
-                        "description": "Incorrect credentials."
+                        "description": "Incorrect credentials.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     },
                     "404": {
-                        "description": "Incorrect credentials."
+                        "description": "Incorrect credentials.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     },
                     "500": {
-                        "description": "Server encountered a problem."
+                        "description": "Server encountered a problem.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -89,6 +301,7 @@
                 "tags": [
                     "User"
                 ],
+                "summary": "Allow user to register.",
                 "description": "Allow user to register.",
                 "parameters": [],
                 "requestBody": {
@@ -104,13 +317,46 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "User is registered."
+                        "description": "User is registered.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     },
                     "401": {
-                        "description": "Email already use."
+                        "description": "Email already use.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     },
                     "500": {
-                        "description": "Server encountered a problem."
+                        "description": "Server encountered a problem.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -120,6 +366,7 @@
                 "tags": [
                     "User"
                 ],
+                "summary": "Allow user to update his account.",
                 "description": "Allow user to update his account.",
                 "parameters": [
                     {
@@ -145,13 +392,42 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "User data updated."
+                        "description": "User data updated.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/user"
+                                }
+                            }
+                        }
                     },
                     "404": {
-                        "description": "User not found."
+                        "description": "User not found.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     },
                     "500": {
-                        "description": "Server encountered a problem."
+                        "description": "Server encountered a problem.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -159,6 +435,7 @@
                 "tags": [
                     "User"
                 ],
+                "summary": "Allow user to delete his account.",
                 "description": "Allow user to delete his account.",
                 "parameters": [
                     {
@@ -173,13 +450,46 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "User account deleted."
+                        "description": "User account deleted.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     },
                     "404": {
-                        "description": "User not found."
+                        "description": "User not found.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     },
                     "500": {
-                        "description": "Server encountered a problem."
+                        "description": "Server encountered a problem.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -189,16 +499,46 @@
                 "tags": [
                     "Quiz"
                 ],
+                "summary": "Get a list of all quiz with short descriptions.",
                 "description": "Get a list of all quiz with short descriptions.",
                 "responses": {
                     "200": {
-                        "description": "Here the quiz list."
+                        "description": "Here the quiz list.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/quizList"
+                                }
+                            }
+                        }
                     },
                     "404": {
-                        "description": "No quiz found."
+                        "description": "No quiz found.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     },
                     "500": {
-                        "description": "Server encountered a problem."
+                        "description": "Server encountered a problem.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -208,16 +548,57 @@
                 "tags": [
                     "Quiz"
                 ],
-                "description": "Get a quiz with this questions and answers through is user id.",
+                "summary": "Get a quiz with this questions and answers through is id.",
+                "description": "Get a quiz with this questions and answers through is id.",
+                "parameters": [
+                    {
+                        "name": "quizId",
+                        "in": "path",
+                        "description": "Quiz Id",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "Here the quiz list."
+                        "description": "Here the quiz with questions and answers.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/oneQuiz"
+                                }
+                            }
+                        }
                     },
                     "404": {
-                        "description": "No quiz found."
+                        "description": "No quiz found.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     },
                     "500": {
-                        "description": "Server encountered a problem."
+                        "description": "Server encountered a problem.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
